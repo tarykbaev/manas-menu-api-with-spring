@@ -1,7 +1,7 @@
 package kg.start.service.controllers;
 
 
-import kg.start.service.services.MenuListService;
+import kg.start.service.parsing.MenuListParsing;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -13,15 +13,15 @@ import java.util.List;
 public class FoodMenuController {
 
     @Autowired
-    private MenuListService menuListService;
+    private MenuListParsing menuListParsing;
 
     @GetMapping("/food/{date}")
     public List<String> getMenuList(@PathVariable("date") String date) {
-        return menuListService.menuList(date);
+        return menuListParsing.getMenuList(date);
     }
 
     @GetMapping("/date")
     public List<String> getDateList() {
-        return menuListService.dateList();
+        return menuListParsing.getDateList();
     }
 }

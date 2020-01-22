@@ -5,6 +5,7 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.text.DateFormat;
@@ -14,7 +15,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.TimeZone;
 
-@Component
+@Service
 public class MenuListParsingImpl implements MenuListParsing {
 
     @Override
@@ -43,7 +44,10 @@ public class MenuListParsingImpl implements MenuListParsing {
 
         int index = menus.indexOf(date);
 
-        if (index < 0) return null;
+        if (index < 0) {
+            toDaysMenu.add("noFood");
+            return toDaysMenu;
+        }
 
         toDaysMenu.add(menus.get(index));   // data
         toDaysMenu.add(menus.get(index + 1));   // name
